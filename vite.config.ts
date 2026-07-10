@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Must match the GitHub repo name for GitHub Pages project sites.
-// https://cophee-lab.github.io/SocialErosion-Survey/
+// GitHub Actions Pages serves the build artifact from the site root
+// (e.g. https://<name>.pages.github.io/), not a /repo-name/ subpath.
 export default defineConfig({
-  base: '/SocialErosion-Survey/',
+  base: '/',
   plugins: [react()],
 })

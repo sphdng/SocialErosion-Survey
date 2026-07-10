@@ -4,10 +4,12 @@ A single-page web app for administering a 3×2×2×2 factorial vignette survey o
 
 ## Live site
 
-After deployment: **https://cophee-lab.github.io/SocialErosion-Survey/**
+Find your deployed URL under **Settings → Pages** in the repo (it will look like `https://something.pages.github.io/`).
 
 - Participant survey: `/`
 - Dev mode (password-gated): `/dev`
+
+> **Note:** If the repo is **private**, only logged-in GitHub users with repo access can view the site. For a participant-facing survey, the repo should be **public** (Settings → General → Change visibility).
 
 ## Local development
 
