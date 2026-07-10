@@ -4,12 +4,14 @@ A single-page web app for administering a 3×2×2×2 factorial vignette survey o
 
 ## Live site
 
-Find your deployed URL under **Settings → Pages** in the repo (it will look like `https://something.pages.github.io/`).
+See [DEPLOY.md](./DEPLOY.md) for full troubleshooting.
+
+**Important:** This repo is currently private. For participants to access the survey without a GitHub login, the repo must be **public** (Settings → General → Change visibility).
+
+After a successful deploy, find your URL at **Settings → Pages** in the repo.
 
 - Participant survey: `/`
 - Dev mode (password-gated): `/dev`
-
-> **Note:** If the repo is **private**, only logged-in GitHub users with repo access can view the site. For a participant-facing survey, the repo should be **public** (Settings → General → Change visibility).
 
 ## Local development
 
