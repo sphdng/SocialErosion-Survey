@@ -1,32 +1,34 @@
-# React + TypeScript + Vite
+# Social Erosion Vignette Survey
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A single-page web app for administering a 3×2×2×2 factorial vignette survey on workplace AI use.
 
-Currently, two official plugins are available:
+## Live site
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+After deployment: **https://cophee-lab.github.io/SocialErosion-Survey/**
 
-## React Compiler
+- Participant survey: `/`
+- Dev mode (password-gated): `/dev`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Local development
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Deployment
+
+Pushes to `main` automatically deploy via GitHub Actions.
+
+To enable GitHub Pages the first time:
+
+1. Go to **Settings → Pages** in the repo
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**
+3. Push to `main` (or re-run the workflow from the Actions tab)
