@@ -1,30 +1,12 @@
-export type AssignmentMode = "query-param" | "random" | "all";
-
-export type QuestionType =
-  | "likert"
-  | "single-choice"
-  | "multiple-choice"
-  | "text"
-  | "numeric";
+export type AssignmentMode =
+  | "query-param"
+  | "random"
+  | "all"
+  | "counterbalanced";
 
 export interface QuestionOption {
   value: string | number;
   label: string;
-}
-
-export interface StudyQuestion {
-  id: string;
-  order: number;
-  exportTag: string;
-  qualtricsQuestionId?: string;
-  type: QuestionType;
-  text: string;
-  required: boolean;
-  options?: QuestionOption[];
-  anchors?: {
-    min?: string;
-    max?: string;
-  };
 }
 
 export interface VignetteCondition {
@@ -34,7 +16,38 @@ export interface VignetteCondition {
   body: string;
   conditionLabel: string;
   metadata?: Record<string, string | number | boolean>;
-  questions: StudyQuestion[];
+}
+
+export type ResponseColumn =
+  | "q1_seek_input"
+  | "q2_incorporate"
+  | "q3"
+  | "q4"
+  | "q5";
+
+export interface SharedQuestion {
+  id: string;
+  responseColumn: ResponseColumn;
+  text: string;
+  required: boolean;
+}
+
+export interface SharedQuestionConfig {
+  scale: QuestionOption[];
+  questions: SharedQuestion[];
+}
+
+export interface CounterbalanceOrder {
+  slot: number;
+  vignetteIds: string[];
+}
+
+export interface CounterbalanceConfig {
+  design: string;
+  plannedParticipants: number;
+  vignettesPerParticipant: number;
+  exposuresPerVignette: number;
+  orders: CounterbalanceOrder[];
 }
 
 export interface StudySettings {
@@ -42,15 +55,4 @@ export interface StudySettings {
   totalVignettes: number;
   vignettesPerParticipant: number;
   questionsPerVignette: number;
-  qualtricsEnabled: boolean;
-  showDirectLinkFallback: boolean;
-  iframeTitle: string;
-  source: string;
-}
-
-export interface PublicVignetteConfig {
-  id: string;
-  title: string;
-  conditionLabel: string;
-  questions: StudyQuestion[];
 }

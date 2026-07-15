@@ -1,26 +1,96 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/app/start.module.css";
 
 export function StartStudyButton() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [pid, setPid] = useState("");
+  const [error, setError] = useState("");
 
-  function beginStudy() {
+  async function beginStudy(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
     setLoading(true);
-    router.push("/study");
+
+    const normalizedPid = pid.trim();
+    if (
+      sessionStorage.getItem("vignette-study:pid") === normalizedPid &&
+      sessionStorage.getItem(`vignette-study:order:${normalizedPid}`)
+    ) {
+      router.push("/study");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/participants", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pid: normalizedPid }),
+      });
+      const result = (await response.json()) as {
+        error?: string;
+        vignetteOrder?: string[];
+      };
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to begin the study.");
+      }
+      if (!result.vignetteOrder || result.vignetteOrder.length !== 6) {
+        throw new Error("The vignette assignment could not be loaded.");
+      }
+
+      sessionStorage.setItem("vignette-study:pid", normalizedPid);
+      sessionStorage.setItem(
+        `vignette-study:order:${normalizedPid}`,
+        JSON.stringify(result.vignetteOrder),
+      );
+      sessionStorage.removeItem(
+        `vignette-study:position:${normalizedPid}`,
+      );
+      router.push("/study");
+    } catch (submissionError) {
+      setError(
+        submissionError instanceof Error
+          ? submissionError.message
+          : "Unable to begin the study.",
+      );
+      setLoading(false);
+    }
   }
 
   return (
-    <button
-      className={styles.button}
-      type="button"
-      onClick={beginStudy}
-      disabled={loading}
-    >
-      {loading ? "Preparing study…" : "Begin study"}
-    </button>
+    <form className={styles.pidForm} onSubmit={beginStudy}>
+      <label className={styles.label} htmlFor="participant-id">
+        Participant ID
+      </label>
+      <p className={styles.hint} id="participant-id-hint">
+        Enter the ID provided by the research team. Do not enter your name.
+      </p>
+      <div className={styles.formRow}>
+        <input
+          className={styles.input}
+          id="participant-id"
+          name="participantId"
+          value={pid}
+          onChange={(event) => setPid(event.target.value)}
+          aria-describedby="participant-id-hint participant-id-error"
+          pattern="[A-Za-z0-9][A-Za-z0-9_-]{0,63}"
+          maxLength={64}
+          autoComplete="off"
+          required
+          disabled={loading}
+        />
+        <button className={styles.button} type="submit" disabled={loading}>
+          {loading ? "Preparing study…" : "Begin study"}
+        </button>
+      </div>
+      {error && (
+        <p className={styles.error} id="participant-id-error" role="alert">
+          {error}
+        </p>
+      )}
+    </form>
   );
 }

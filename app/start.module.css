@@ -15,9 +15,46 @@
 }
 
 .actions {
-  display: flex;
-  justify-content: flex-end;
   padding: 0 clamp(20px, 4vw, 44px) clamp(28px, 4vw, 44px);
+}
+
+.pidForm {
+  padding-top: 28px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.label {
+  display: block;
+  color: #111827;
+  font-weight: 700;
+}
+
+.hint {
+  margin: 6px 0 14px;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.formRow {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.input {
+  min-width: 0;
+  flex: 1;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid #9ca3af;
+  border-radius: 8px;
+  color: #111827;
+  font: inherit;
+}
+
+.input:focus {
+  border-color: #1d4ed8;
+  outline: 3px solid rgb(29 78 216 / 18%);
 }
 
 .button {
@@ -40,6 +77,13 @@
   opacity: 0.72;
 }
 
+.error {
+  margin: 12px 0 0;
+  color: #b91c1c;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
 @media (max-width: 640px) {
   .page {
     padding: 0;
@@ -56,5 +100,9 @@
 
   .button {
     width: 100%;
+  }
+
+  .formRow {
+    display: grid;
   }
 }

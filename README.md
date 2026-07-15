@@ -1,43 +1,76 @@
 # Workplace Vignette Study
 
-A Next.js presentation layer for a 24-condition workplace AI vignette
-study. Each participant sees all 24 vignettes in order. Vercel keeps the
-current vignette visible; NYU Qualtrics repeats the same five response
-questions for each vignette and records all 120 answers.
-
-The application does not store participant answers.
+A Next.js survey for a 24-condition workplace AI vignette study with 300
+planned participants. Each participant receives six counterbalanced
+vignettes, answers the same five questions in a fixed order, and saves one
+long-format row per vignette to Supabase.
 
 ## Study flow
 
 ```text
-Start page → 24 vignettes → five Qualtrics questions per vignette
+Participant ID → 6 counterbalanced vignettes × 5 required questions → completion
 ```
 
-Qualtrics Loop & Merge controls progression and only advances after all
-five required questions for the current vignette are answered.
+Each Save and continue click validates all five answers, writes the
+current row, and advances only after Supabase confirms the save.
 
 ## Editable configuration
 
-- `config/study.json` — assignment and integration settings
+- `config/study.json` — study size and assignment mode
 - `config/background.json` — start-page and background-dialog content
-- `config/vignettes.json` — all vignette text, metadata, and question
-  mappings
+- `config/vignettes.json` — vignette text and factor metadata
+- `config/questions.json` — the five shared questions and response scale
+- `config/counterbalance.json` — all 300 six-vignette assignment orders
 
-The recovered final vignette text is present for all 24 conditions.
-Question wording remains visibly marked `[PLACEHOLDER]`; replace it before
-data collection. See
+All five shared questions have confirmed wording. See
 [`docs/ADDING_OR_EDITING_VIGNETTES.md`](docs/ADDING_OR_EDITING_VIGNETTES.md).
 
-## Local development
+The assignment table gives every vignette exactly 75 exposures. Every
+participant receives two vignettes from each task type and a 3/3 split on
+each binary factor. Vignette positions differ by at most one exposure.
+Regenerate and validate the table with `npm run generate:counterbalance`.
+
+## Local setup
+
+Local Supabase requires Docker Desktop.
 
 ```bash
 npm install
+npx supabase start
+npx supabase status
+```
+
+Copy `.env.example` to `.env.local`, then copy the local service-role key
+reported by `npx supabase status`:
+
+```bash
+SUPABASE_URL=http://127.0.0.1:54321
+SUPABASE_SERVICE_ROLE_KEY=your-local-service-role-key
+```
+
+The service-role key is server-only. Never rename it with a
+`NEXT_PUBLIC_` prefix or commit `.env.local`.
+
+Start the website:
+
+```bash
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
+Open `http://localhost:3000`. The migration creates:
 
-Validation and tests:
+- `participants` — one row per PID
+- `vignette_responses` — one row per PID and vignette
+- `analysis_responses` — a view with the column names shown in the target
+  analysis schema
+
+Reset the local database and reapply migrations with:
+
+```bash
+npx supabase db reset
+```
+
+## Validation
 
 ```bash
 npm run lint
@@ -45,43 +78,9 @@ npm test
 npm run build
 ```
 
-## Environment
+## Vercel and hosted Supabase
 
-Copy `.env.example` to `.env.local`:
-
-```bash
-NEXT_PUBLIC_QUALTRICS_SURVEY_URL=https://nyu.qualtrics.com/jfe/form/SV_by0axqrHkdSorA2
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
-
-The Qualtrics distribution URL is public, not a secret. Never add an API
-token to a `NEXT_PUBLIC_` variable.
-
-## Vercel deployment
-
-1. Import this GitHub repository into Vercel.
-2. Keep the detected framework preset as **Next.js**.
-3. Add both environment variables from `.env.example`.
-4. Set `NEXT_PUBLIC_SITE_URL` to the production Vercel domain.
-5. Deploy and test the full 24-vignette flow on desktop and mobile.
-6. Submit test responses and verify embedded data in Qualtrics.
-
-## Qualtrics integration
-
-Qualtrics must have the five stable response fields and embedded-data
-fields described in
-[`docs/QUALTRICS_SETUP.md`](docs/QUALTRICS_SETUP.md).
-
-The application exposes read-only public configuration at:
-
-```text
-/api/study-config/v01
-```
-
-The documented Qualtrics message bridge tells the parent website when Loop
-& Merge advances, allowing the left vignette panel and progress indicator
-to stay synchronized without exposing answers.
-
-If NYU Qualtrics blocks iframe embedding, the participant can use the
-condition-preserving direct link shown below the iframe. Do not proxy or
-bypass Qualtrics security headers.
+For production, link the local Supabase project to a hosted Supabase
+project and apply the migration. Add its URL and service-role key as
+server-side Vercel environment variables. The browser never receives
+database credentials; all writes go through validated Next.js API routes.

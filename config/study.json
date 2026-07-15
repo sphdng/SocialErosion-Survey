@@ -1,10 +1,6 @@
 {
-  "assignmentMode": "all",
+  "assignmentMode": "counterbalanced",
   "totalVignettes": 24,
-  "vignettesPerParticipant": 24,
-  "questionsPerVignette": 5,
-  "qualtricsEnabled": true,
-  "showDirectLinkFallback": true,
-  "iframeTitle": "Workplace vignette survey questions",
-  "source": "vercel-study-site"
+  "vignettesPerParticipant": 6,
+  "questionsPerVignette": 5
 }

@@ -4,8 +4,6 @@ import { BackgroundDialog } from "@/components/BackgroundDialog";
 interface VignettePanelProps {
   title: string;
   body: string;
-  conditionLabel?: string;
-  vignetteId?: string;
   currentPosition: number;
   total: number;
 }
@@ -13,8 +11,6 @@ interface VignettePanelProps {
 export function VignettePanel({
   title,
   body,
-  conditionLabel,
-  vignetteId,
   currentPosition,
   total,
 }: VignettePanelProps) {
@@ -41,14 +37,6 @@ export function VignettePanel({
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
-
-      {process.env.NODE_ENV === "development" &&
-        conditionLabel &&
-        vignetteId && (
-          <p className={styles.condition}>
-            Development preview: {vignetteId} — {conditionLabel}
-          </p>
-        )}
     </section>
   );
 }

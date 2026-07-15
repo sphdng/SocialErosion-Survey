@@ -5,14 +5,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | Human-led | Generic | Personal",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex privately used a general-purpose AI assistant that had no access to company files, then reviewed the suggestions and decided how to apply them before moving forward.",
-    "metadata": { "task_type": "information-seeking", "leadership": "human-led", "knowledge_type": "generic", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v01.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v01.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v01.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v01.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v01.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "human-led",
+      "knowledge_type": "generic",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v02",
@@ -20,14 +18,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | Human-led | Generic | Team-level",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex used a general-purpose AI assistant in the team's shared workspace, where Sam and other teammates could see the exchange, then reviewed the suggestions and decided how to apply them before moving forward.",
-    "metadata": { "task_type": "information-seeking", "leadership": "human-led", "knowledge_type": "generic", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v02.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v02.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v02.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v02.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v02.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "human-led",
+      "knowledge_type": "generic",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v03",
@@ -35,14 +31,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | Human-led | Org-specific | Personal",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex privately used an AI assistant connected to company files and past projects, then reviewed the tailored suggestions and decided how to apply them before moving forward.",
-    "metadata": { "task_type": "information-seeking", "leadership": "human-led", "knowledge_type": "org-specific", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v03.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v03.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v03.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v03.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v03.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "human-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v04",
@@ -50,14 +44,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | Human-led | Org-specific | Team-level",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex used an AI assistant connected to company files and past projects in the team's shared workspace, where Sam and other teammates could see the exchange, then reviewed the tailored suggestions and decided how to apply them before moving forward.",
-    "metadata": { "task_type": "information-seeking", "leadership": "human-led", "knowledge_type": "org-specific", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v04.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v04.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v04.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v04.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v04.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "human-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v05",
@@ -65,14 +57,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | AI-led | Generic | Personal",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex privately asked a general-purpose AI assistant with no access to company files to recommend the approach, then used the AI's answer largely as-is.",
-    "metadata": { "task_type": "information-seeking", "leadership": "ai-led", "knowledge_type": "generic", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v05.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v05.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v05.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v05.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v05.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "ai-led",
+      "knowledge_type": "generic",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v06",
@@ -80,14 +70,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | AI-led | Generic | Team-level",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex asked a general-purpose AI assistant in the team's shared workspace, where Sam and other teammates could see the exchange, to recommend the approach, then used the AI's answer largely as-is.",
-    "metadata": { "task_type": "information-seeking", "leadership": "ai-led", "knowledge_type": "generic", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v06.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v06.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v06.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v06.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v06.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "ai-led",
+      "knowledge_type": "generic",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v07",
@@ -95,14 +83,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | AI-led | Org-specific | Personal",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex privately asked an AI assistant connected to company files and past projects to recommend the approach, then used the AI's tailored answer largely as-is.",
-    "metadata": { "task_type": "information-seeking", "leadership": "ai-led", "knowledge_type": "org-specific", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v07.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v07.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v07.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v07.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v07.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "ai-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v08",
@@ -110,14 +96,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Information Seeking | AI-led | Org-specific | Team-level",
     "body": "Alex needed to figure out the right approach for analyzing a dataset. Alex asked an AI assistant connected to company files and past projects in the team's shared workspace, where Sam and other teammates could see the exchange, to recommend the approach, then used the AI's tailored answer largely as-is.",
-    "metadata": { "task_type": "information-seeking", "leadership": "ai-led", "knowledge_type": "org-specific", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v08.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v08.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v08.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v08.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v08.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "information-seeking",
+      "leadership": "ai-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v09",
@@ -125,14 +109,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | Human-led | Generic | Personal",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex privately used a general-purpose AI assistant that had no access to company files to generate initial ideas, then selected, revised, and built on them using their own judgment.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "human-led", "knowledge_type": "generic", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v09.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v09.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v09.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v09.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v09.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "human-led",
+      "knowledge_type": "generic",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v10",
@@ -140,14 +122,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | Human-led | Generic | Team-level",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex used a general-purpose AI assistant in the team's shared workspace, where Sam and other teammates could see the exchange, to generate initial ideas, then selected, revised, and built on them using their own judgment.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "human-led", "knowledge_type": "generic", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v10.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v10.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v10.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v10.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v10.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "human-led",
+      "knowledge_type": "generic",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v11",
@@ -155,14 +135,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | Human-led | Org-specific | Personal",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex privately used an AI assistant connected to company files and past projects to generate tailored initial ideas, then selected, revised, and built on them using their own judgment.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "human-led", "knowledge_type": "org-specific", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v11.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v11.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v11.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v11.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v11.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "human-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v12",
@@ -170,14 +148,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | Human-led | Org-specific | Team-level",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex used an AI assistant connected to company files and past projects in the team's shared workspace, where Sam and other teammates could see the exchange, to generate tailored initial ideas, then selected, revised, and built on them using their own judgment.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "human-led", "knowledge_type": "org-specific", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v12.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v12.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v12.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v12.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v12.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "human-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v13",
@@ -185,14 +161,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | AI-led | Generic | Personal",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex privately asked a general-purpose AI assistant with no access to company files to generate the pitch angles, then used the AI's options largely as-is.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "ai-led", "knowledge_type": "generic", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v13.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v13.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v13.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v13.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v13.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "ai-led",
+      "knowledge_type": "generic",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v14",
@@ -200,14 +174,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | AI-led | Generic | Team-level",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex asked a general-purpose AI assistant in the team's shared workspace, where Sam and other teammates could see the exchange, to generate the pitch angles, then used the AI's options largely as-is.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "ai-led", "knowledge_type": "generic", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v14.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v14.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v14.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v14.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v14.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "ai-led",
+      "knowledge_type": "generic",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v15",
@@ -215,14 +187,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | AI-led | Org-specific | Personal",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex privately asked an AI assistant connected to company files and past projects to generate tailored pitch angles, then used the AI's options largely as-is.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "ai-led", "knowledge_type": "org-specific", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v15.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v15.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v15.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v15.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v15.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "ai-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v16",
@@ -230,14 +200,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Brainstorming / Ideation | AI-led | Org-specific | Team-level",
     "body": "Alex needed to come up with possible angles for an upcoming client pitch. Alex asked an AI assistant connected to company files and past projects in the team's shared workspace, where Sam and other teammates could see the exchange, to generate tailored pitch angles, then used the AI's options largely as-is.",
-    "metadata": { "task_type": "brainstorming-ideation", "leadership": "ai-led", "knowledge_type": "org-specific", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v16.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v16.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v16.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v16.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v16.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "brainstorming-ideation",
+      "leadership": "ai-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v17",
@@ -245,14 +213,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | Human-led | Generic | Personal",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex privately used a general-purpose AI assistant that had no access to company files for feedback, then revised the message using their own judgment before sending it.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "human-led", "knowledge_type": "generic", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v17.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v17.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v17.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v17.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v17.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "human-led",
+      "knowledge_type": "generic",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v18",
@@ -260,14 +226,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | Human-led | Generic | Team-level",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex used a general-purpose AI assistant in the team's shared workspace, where Sam and other teammates could see the exchange, for feedback, then revised the message using their own judgment before sending it.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "human-led", "knowledge_type": "generic", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v18.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v18.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v18.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v18.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v18.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "human-led",
+      "knowledge_type": "generic",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v19",
@@ -275,14 +239,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | Human-led | Org-specific | Personal",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex privately used an AI assistant connected to company files and past client materials for tailored feedback, then revised the message using their own judgment before sending it.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "human-led", "knowledge_type": "org-specific", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v19.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v19.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v19.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v19.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v19.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "human-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v20",
@@ -290,14 +252,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | Human-led | Org-specific | Team-level",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex used an AI assistant connected to company files and past client materials in the team's shared workspace, where Sam and other teammates could see the exchange, for tailored feedback, then revised the message using their own judgment before sending it.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "human-led", "knowledge_type": "org-specific", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v20.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v20.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v20.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v20.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v20.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "human-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v21",
@@ -305,14 +265,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | AI-led | Generic | Personal",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex privately asked a general-purpose AI assistant with no access to company files to review and revise the message, then used the AI's version largely as-is.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "ai-led", "knowledge_type": "generic", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v21.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v21.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v21.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v21.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v21.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "ai-led",
+      "knowledge_type": "generic",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v22",
@@ -320,14 +278,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | AI-led | Generic | Team-level",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex asked a general-purpose AI assistant in the team's shared workspace, where Sam and other teammates could see the exchange, to review and revise the message, then used the AI's version largely as-is.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "ai-led", "knowledge_type": "generic", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v22.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v22.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v22.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v22.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v22.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "ai-led",
+      "knowledge_type": "generic",
+      "impact_level": "team-level"
+    }
   },
   {
     "id": "v23",
@@ -335,14 +291,12 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | AI-led | Org-specific | Personal",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex privately asked an AI assistant connected to company files and past client materials to review and revise the message, then used the AI's tailored version largely as-is.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "ai-led", "knowledge_type": "org-specific", "impact_level": "personal" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v23.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v23.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v23.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v23.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v23.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "ai-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "personal"
+    }
   },
   {
     "id": "v24",
@@ -350,13 +304,11 @@
     "title": "Workplace Scenario",
     "conditionLabel": "Feedback / Validation | AI-led | Org-specific | Team-level",
     "body": "Alex had drafted a message to a client and wanted to check whether the tone and content were appropriate. Alex asked an AI assistant connected to company files and past client materials in the team's shared workspace, where Sam and other teammates could see the exchange, to review and revise the message, then used the AI's tailored version largely as-is.",
-    "metadata": { "task_type": "feedback-validation", "leadership": "ai-led", "knowledge_type": "org-specific", "impact_level": "team-level" },
-    "questions": [
-      { "id": "q1", "order": 1, "exportTag": "VIGNETTE_Q1", "qualtricsQuestionId": "QID1", "type": "text", "text": "[PLACEHOLDER] Question 1 for vignette v24.", "required": true },
-      { "id": "q2", "order": 2, "exportTag": "VIGNETTE_Q2", "qualtricsQuestionId": "QID2", "type": "text", "text": "[PLACEHOLDER] Question 2 for vignette v24.", "required": true },
-      { "id": "q3", "order": 3, "exportTag": "VIGNETTE_Q3", "qualtricsQuestionId": "QID3", "type": "text", "text": "[PLACEHOLDER] Question 3 for vignette v24.", "required": true },
-      { "id": "q4", "order": 4, "exportTag": "VIGNETTE_Q4", "qualtricsQuestionId": "QID4", "type": "text", "text": "[PLACEHOLDER] Question 4 for vignette v24.", "required": true },
-      { "id": "q5", "order": 5, "exportTag": "VIGNETTE_Q5", "qualtricsQuestionId": "QID5", "type": "text", "text": "[PLACEHOLDER] Question 5 for vignette v24.", "required": true }
-    ]
+    "metadata": {
+      "task_type": "feedback-validation",
+      "leadership": "ai-led",
+      "knowledge_type": "org-specific",
+      "impact_level": "team-level"
+    }
   }
 ]

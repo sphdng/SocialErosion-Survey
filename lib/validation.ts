@@ -1,4 +1,6 @@
 import type {
+  CounterbalanceConfig,
+  SharedQuestionConfig,
   StudySettings,
   VignetteCondition,
 } from "@/types/study";
@@ -17,6 +19,8 @@ function requireText(value: string, label: string): void {
 export function validateStudyConfig(
   settings: StudySettings,
   vignettes: VignetteCondition[],
+  questionConfig: SharedQuestionConfig,
+  counterbalanceConfig: CounterbalanceConfig,
 ): void {
   if (settings.totalVignettes !== 24 || vignettes.length !== 24) {
     throw new Error("Study configuration must contain exactly 24 vignettes.");
@@ -54,66 +58,133 @@ export function validateStudyConfig(
     throw new Error("Vignette IDs must run in order from v01 through v24.");
   }
 
+  if (
+    questionConfig.questions.length !== settings.questionsPerVignette ||
+    questionConfig.scale.length < 2
+  ) {
+    throw new Error(
+      "The shared question configuration must contain five questions and a response scale.",
+    );
+  }
+
+  const expectedColumns = [
+    "q1_seek_input",
+    "q2_incorporate",
+    "q3",
+    "q4",
+    "q5",
+  ];
+  const responseColumns = questionConfig.questions.map(
+    (question) => question.responseColumn,
+  );
+  if (
+    new Set(responseColumns).size !== expectedColumns.length ||
+    expectedColumns.some((column, index) => responseColumns[index] !== column)
+  ) {
+    throw new Error(
+      "Question response columns must match the database schema in order.",
+    );
+  }
+
+  for (const question of questionConfig.questions) {
+    requireText(question.id, "Question ID");
+    requireText(question.text, `${question.id} text`);
+  }
+  for (const option of questionConfig.scale) {
+    requireText(String(option.value), "Scale value");
+    requireText(option.label, "Scale label");
+  }
+
+  if (settings.assignmentMode === "counterbalanced") {
+    if (
+      counterbalanceConfig.plannedParticipants !== 300 ||
+      counterbalanceConfig.orders.length !== 300 ||
+      counterbalanceConfig.vignettesPerParticipant !==
+        settings.vignettesPerParticipant
+    ) {
+      throw new Error(
+        "Counterbalance configuration must contain 300 six-vignette orders.",
+      );
+    }
+
+    const vignetteById = new Map(
+      vignettes.map((vignette) => [vignette.id, vignette]),
+    );
+    const exposures = new Map(ids.map((id) => [id, 0]));
+    const positionCounts = new Map(
+      ids.map((id) => [
+        id,
+        Array(settings.vignettesPerParticipant).fill(0) as number[],
+      ]),
+    );
+
+    counterbalanceConfig.orders.forEach((order, orderIndex) => {
+      if (
+        order.slot !== orderIndex + 1 ||
+        order.vignetteIds.length !== settings.vignettesPerParticipant ||
+        new Set(order.vignetteIds).size !== order.vignetteIds.length
+      ) {
+        throw new Error(`Counterbalance slot ${orderIndex + 1} is invalid.`);
+      }
+
+      const assignedVignettes = order.vignetteIds.map((id, position) => {
+        const vignette = vignetteById.get(id);
+        if (!vignette) {
+          throw new Error(`Counterbalance order contains unknown ID ${id}.`);
+        }
+        exposures.set(id, (exposures.get(id) ?? 0) + 1);
+        positionCounts.get(id)![position] += 1;
+        return vignette;
+      });
+
+      const taskCounts = new Map<string, number>();
+      for (const vignette of assignedVignettes) {
+        const taskType = String(vignette.metadata?.task_type);
+        taskCounts.set(taskType, (taskCounts.get(taskType) ?? 0) + 1);
+      }
+      if (
+        taskCounts.size !== 3 ||
+        [...taskCounts.values()].some((count) => count !== 2)
+      ) {
+        throw new Error(
+          `Counterbalance slot ${order.slot} must include two of each task type.`,
+        );
+      }
+
+      for (const factor of ["leadership", "knowledge_type", "impact_level"]) {
+        const factorCounts = new Map<string, number>();
+        for (const vignette of assignedVignettes) {
+          const value = String(vignette.metadata?.[factor]);
+          factorCounts.set(value, (factorCounts.get(value) ?? 0) + 1);
+        }
+        if (
+          factorCounts.size !== 2 ||
+          [...factorCounts.values()].some((count) => count !== 3)
+        ) {
+          throw new Error(
+            `Counterbalance slot ${order.slot} does not balance ${factor}.`,
+          );
+        }
+      }
+    });
+
+    for (const id of ids) {
+      if (exposures.get(id) !== counterbalanceConfig.exposuresPerVignette) {
+        throw new Error(`${id} does not have the expected exposure count.`);
+      }
+      const counts = positionCounts.get(id)!;
+      if (Math.max(...counts) - Math.min(...counts) > 1) {
+        throw new Error(`${id} is not balanced across vignette positions.`);
+      }
+    }
+  }
+
   for (const vignette of vignettes) {
     requireText(vignette.id, "Vignette ID");
     requireText(vignette.slug, `${vignette.id} slug`);
     requireText(vignette.title, `${vignette.id} title`);
     requireText(vignette.body, `${vignette.id} body`);
     requireText(vignette.conditionLabel, `${vignette.id} conditionLabel`);
-
-    if (vignette.questions.length !== settings.questionsPerVignette) {
-      throw new Error(`${vignette.id} must contain exactly 5 questions.`);
-    }
-
-    const questionIds = vignette.questions.map((question) => question.id);
-    if (new Set(questionIds).size !== questionIds.length) {
-      throw new Error(`${vignette.id} contains duplicate question IDs.`);
-    }
-
-    for (const [index, question] of vignette.questions.entries()) {
-      if (question.order !== index + 1) {
-        throw new Error(
-          `${vignette.id} question orders must run from 1 through 5.`,
-        );
-      }
-
-      requireText(question.id, `${vignette.id} question ID`);
-      requireText(question.text, `${vignette.id}/${question.id} text`);
-      requireText(
-        question.exportTag,
-        `${vignette.id}/${question.id} exportTag`,
-      );
-
-      if (
-        settings.qualtricsEnabled &&
-        !question.qualtricsQuestionId?.trim()
-      ) {
-        throw new Error(
-          `${vignette.id}/${question.id} needs a Qualtrics question ID.`,
-        );
-      }
-
-      if (question.type === "likert") {
-        if (!question.options || question.options.length < 2) {
-          throw new Error(
-            `${vignette.id}/${question.id} needs ordered Likert options.`,
-          );
-        }
-        const numericValues = question.options.map((option) =>
-          Number(option.value),
-        );
-        if (
-          numericValues.some(
-            (value, optionIndex) =>
-              optionIndex > 0 && value <= numericValues[optionIndex - 1],
-          )
-        ) {
-          throw new Error(
-            `${vignette.id}/${question.id} Likert options are not ordered.`,
-          );
-        }
-      }
-    }
 
     const serialized = JSON.stringify(vignette).toLowerCase();
     if (

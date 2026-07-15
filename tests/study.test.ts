@@ -1,23 +1,38 @@
 import { describe, expect, it } from "vitest";
 import {
-  buildQualtricsSessionUrl,
-  buildQualtricsUrl,
-} from "@/lib/qualtrics";
-import {
+  counterbalanceConfig,
   getVignetteById,
+  questionConfig,
   studySettings,
   vignettes,
 } from "@/lib/studyConfig";
+import {
+  buildResponseRow,
+  SubmissionValidationError,
+} from "@/lib/submission";
 import { validateStudyConfig } from "@/lib/validation";
+
+const completeAnswers = {
+  q1: "Agree",
+  q2: "Strongly agree",
+  q3: "Neither agree nor disagree",
+  q4: "Disagree",
+  q5: "Strongly disagree",
+};
 
 describe("study configuration", () => {
   it("passes validation", () => {
     expect(() =>
-      validateStudyConfig(studySettings, vignettes),
+      validateStudyConfig(
+        studySettings,
+        vignettes,
+        questionConfig,
+        counterbalanceConfig,
+      ),
     ).not.toThrow();
   });
 
-  it("contains v01 through v24 with five questions each", () => {
+  it("contains v01 through v24 and five shared questions", () => {
     expect(vignettes).toHaveLength(24);
     expect(vignettes.map((vignette) => vignette.id)).toEqual(
       Array.from(
@@ -25,57 +40,67 @@ describe("study configuration", () => {
         (_, index) => `v${String(index + 1).padStart(2, "0")}`,
       ),
     );
-    expect(
-      vignettes.every((vignette) => vignette.questions.length === 5),
-    ).toBe(true);
+    expect(questionConfig.questions).toHaveLength(5);
   });
 
   it("looks up valid IDs and rejects invalid IDs", () => {
     expect(getVignetteById("v01")?.id).toBe("v01");
     expect(getVignetteById("v24")?.id).toBe("v24");
     expect(getVignetteById("v25")).toBeUndefined();
-    expect(getVignetteById("invalid")).toBeUndefined();
   });
 });
 
-describe("Qualtrics URL construction", () => {
-  it("encodes the condition and metadata", () => {
-    const vignette = getVignetteById("v01");
-    expect(vignette).toBeDefined();
-
-    const result = new URL(
-      buildQualtricsUrl(
-        "https://nyu.qualtrics.com/jfe/form/SV_example",
-        vignette!,
-      ),
+describe("response rows", () => {
+  it("derives factor and vignette fields from server configuration", () => {
+    const row = buildResponseRow(
+      {
+        pid: "P1",
+        vignetteId: "v01",
+        position: 1,
+        answers: completeAnswers,
+        timeSpentMs: 1000,
+      },
+      ["v01"],
     );
 
-    expect(result.searchParams.get("vignette_id")).toBe("v01");
-    expect(result.searchParams.get("condition_label")).toBe(
-      vignette!.conditionLabel,
-    );
-    expect(result.searchParams.get("task_type")).toBe(
-      "information-seeking",
-    );
-    expect(result.searchParams.get("source")).toBe(
-      "vercel-study-site",
-    );
+    expect(row).toMatchObject({
+      pid: "P1",
+      vignette_id: "v01",
+      vignette_number: 1,
+      task_type: "Information",
+      iv2: "Human",
+      iv3: "Generic",
+      iv4: "Personal",
+      q1_seek_input: "Agree",
+      time_spent_ms: 1000,
+    });
   });
 
-  it("includes all 24 session vignettes by position", () => {
-    const result = new URL(
-      buildQualtricsSessionUrl(
-        "https://nyu.qualtrics.com/jfe/form/SV_example",
-        vignettes,
+  it("rejects missing answers and mismatched vignette positions", () => {
+    expect(() =>
+      buildResponseRow(
+        {
+          pid: "P1",
+          vignetteId: "v02",
+          position: 1,
+          answers: completeAnswers,
+          timeSpentMs: 1000,
+        },
+        ["v01"],
       ),
-    );
+    ).toThrow(SubmissionValidationError);
 
-    expect(result.searchParams.get("vignette_ids")).toBe(
-      vignettes.map((vignette) => vignette.id).join(","),
-    );
-    expect(result.searchParams.get("vignette_1")).toBe("v01");
-    expect(result.searchParams.get("vignette_24")).toBe("v24");
-    expect(result.searchParams.get("vignette_count")).toBe("24");
+    expect(() =>
+      buildResponseRow(
+        {
+          pid: "P1",
+          vignetteId: "v01",
+          position: 1,
+          answers: { ...completeAnswers, q5: "" },
+          timeSpentMs: 1000,
+        },
+        ["v01"],
+      ),
+    ).toThrow("Every question requires a valid response.");
   });
 });
-

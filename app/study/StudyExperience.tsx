@@ -1,73 +1,165 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { QualtricsPanel } from "@/components/QualtricsPanel";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { VignettePanel } from "@/components/VignettePanel";
-import type { VignetteCondition } from "@/types/study";
+import type {
+  SharedQuestionConfig,
+  VignetteCondition,
+} from "@/types/study";
 import styles from "./study.module.css";
 
 interface StudyExperienceProps {
   vignettes: VignetteCondition[];
-  surveyUrl: string;
-  iframeTitle: string;
-  showDirectLinkFallback: boolean;
-}
-
-interface QualtricsProgressMessage {
-  type?: unknown;
-  vignetteId?: unknown;
-  position?: unknown;
-}
-
-function isQualtricsOrigin(origin: string): boolean {
-  try {
-    const url = new URL(origin);
-    return (
-      url.protocol === "https:" &&
-      (url.hostname === "qualtrics.com" ||
-        url.hostname.endsWith(".qualtrics.com"))
-    );
-  } catch {
-    return false;
-  }
+  questionConfig: SharedQuestionConfig;
 }
 
 export function StudyExperience({
   vignettes,
-  surveyUrl,
-  iframeTitle,
-  showDirectLinkFallback,
+  questionConfig,
 }: StudyExperienceProps) {
+  const router = useRouter();
+  const [pid, setPid] = useState("");
+  const [assignedVignettes, setAssignedVignettes] = useState<
+    VignetteCondition[]
+  >([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [ready, setReady] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [completed, setCompleted] = useState(false);
+  const startedAtRef = useRef(Date.now());
 
   useEffect(() => {
-    function handleMessage(event: MessageEvent<QualtricsProgressMessage>) {
-      if (!isQualtricsOrigin(event.origin)) return;
-      if (event.data?.type !== "vignette-study:progress") return;
+    const storedPid = sessionStorage.getItem("vignette-study:pid");
+    if (!storedPid) {
+      router.replace("/");
+      return;
+    }
 
-      if (typeof event.data.vignetteId === "string") {
-        const index = vignettes.findIndex(
-          (vignette) => vignette.id === event.data.vignetteId,
-        );
-        if (index >= 0) setActiveIndex(index);
+    let vignetteOrder: unknown;
+    try {
+      vignetteOrder = JSON.parse(
+        sessionStorage.getItem(`vignette-study:order:${storedPid}`) ?? "",
+      );
+    } catch {
+      vignetteOrder = null;
+    }
+    if (
+      !Array.isArray(vignetteOrder) ||
+      vignetteOrder.length !== 6 ||
+      vignetteOrder.some((id) => typeof id !== "string")
+    ) {
+      sessionStorage.removeItem("vignette-study:pid");
+      router.replace("/");
+      return;
+    }
+
+    const assigned = vignetteOrder.map((id) =>
+      vignettes.find((vignette) => vignette.id === id),
+    );
+    if (assigned.some((vignette) => !vignette)) {
+      sessionStorage.removeItem("vignette-study:pid");
+      router.replace("/");
+      return;
+    }
+
+    const storedPosition = Number(
+      sessionStorage.getItem(`vignette-study:position:${storedPid}`),
+    );
+    if (
+      Number.isInteger(storedPosition) &&
+      storedPosition >= 0 &&
+      storedPosition < assigned.length
+    ) {
+      setActiveIndex(storedPosition);
+    }
+    setPid(storedPid);
+    setAssignedVignettes(assigned as VignetteCondition[]);
+    startedAtRef.current = Date.now();
+    setReady(true);
+  }, [router, vignettes]);
+
+  async function submitResponses(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/responses", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pid,
+          vignetteId: activeVignette.id,
+          position: activeIndex + 1,
+          answers,
+          timeSpentMs: Math.min(
+            Date.now() - startedAtRef.current,
+            86_400_000,
+          ),
+        }),
+      });
+      const result = (await response.json()) as {
+        error?: string;
+        completed?: boolean;
+      };
+      if (!response.ok) {
+        throw new Error(result.error || "The response could not be saved.");
+      }
+
+      if (result.completed) {
+        sessionStorage.removeItem("vignette-study:pid");
+        sessionStorage.removeItem(`vignette-study:position:${pid}`);
+        sessionStorage.removeItem(`vignette-study:order:${pid}`);
+        setCompleted(true);
         return;
       }
 
-      if (
-        typeof event.data.position === "number" &&
-        Number.isInteger(event.data.position) &&
-        event.data.position >= 1 &&
-        event.data.position <= vignettes.length
-      ) {
-        setActiveIndex(event.data.position - 1);
-      }
+      const nextIndex = activeIndex + 1;
+      sessionStorage.setItem(
+        `vignette-study:position:${pid}`,
+        String(nextIndex),
+      );
+      setActiveIndex(nextIndex);
+      setAnswers({});
+      startedAtRef.current = Date.now();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (submissionError) {
+      setError(
+        submissionError instanceof Error
+          ? submissionError.message
+          : "The response could not be saved.",
+      );
+    } finally {
+      setSubmitting(false);
     }
+  }
 
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [vignettes]);
+  if (!ready) {
+    return (
+      <main className={styles.statePage}>
+        <section className={styles.stateCard}>
+          <h1>Preparing study…</h1>
+          <p>Checking your participant session.</p>
+        </section>
+      </main>
+    );
+  }
 
-  const activeVignette = vignettes[activeIndex];
+  if (completed) {
+    return (
+      <main className={styles.statePage}>
+        <section className={styles.stateCard}>
+          <h1>Study complete</h1>
+          <p>Your responses have been saved. You may now close this window.</p>
+        </section>
+      </main>
+    );
+  }
+
+  const activeVignette = assignedVignettes[activeIndex];
 
   return (
     <main className={styles.studyPage}>
@@ -75,16 +167,75 @@ export function StudyExperience({
         <VignettePanel
           title={activeVignette.title}
           body={activeVignette.body}
-          conditionLabel={activeVignette.conditionLabel}
-          vignetteId={activeVignette.id}
           currentPosition={activeIndex + 1}
-          total={vignettes.length}
+          total={assignedVignettes.length}
         />
-        <QualtricsPanel
-          surveyUrl={surveyUrl}
-          iframeTitle={iframeTitle}
-          showDirectLinkFallback={showDirectLinkFallback}
-        />
+        <section
+          className={styles.questionsPanel}
+          aria-labelledby="survey-questions-heading"
+        >
+          <h2 id="survey-questions-heading" className={styles.srOnly}>
+            Questions about this scenario
+          </h2>
+          <p className={styles.requiredNote}>All questions are required</p>
+
+          <form onSubmit={submitResponses}>
+            <div className={styles.questionList}>
+              {questionConfig.questions.map((question) => (
+                <fieldset className={styles.question} key={question.id}>
+                  <legend>{question.text}</legend>
+                  <div className={styles.options}>
+                    {questionConfig.scale.map((option) => {
+                      const optionValue = String(option.value);
+                      return (
+                        <label className={styles.option} key={optionValue}>
+                          <input
+                            type="radio"
+                            name={question.id}
+                            value={optionValue}
+                            checked={answers[question.id] === optionValue}
+                            onChange={() =>
+                              setAnswers((current) => ({
+                                ...current,
+                                [question.id]: optionValue,
+                              }))
+                            }
+                            required={question.required}
+                            disabled={submitting}
+                          />
+                          <span>{option.label}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+              ))}
+            </div>
+
+            {error && (
+              <p className={styles.submitError} role="alert">
+                {error}
+              </p>
+            )}
+
+            <div className={styles.submitRow}>
+              <p aria-live="polite">
+                Responses are saved when you continue.
+              </p>
+              <button
+                className={styles.nextButton}
+                type="submit"
+                disabled={submitting}
+              >
+                {submitting
+                  ? "Saving…"
+                  : activeIndex === assignedVignettes.length - 1
+                    ? "Submit final responses"
+                    : "Save and continue"}
+              </button>
+            </div>
+          </form>
+        </section>
       </div>
     </main>
   );
