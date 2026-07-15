@@ -1,5 +1,5 @@
 {
-  "assignmentMode": "query-param",
+  "assignmentMode": "random",
   "totalVignettes": 24,
   "questionsPerVignette": 5,
   "qualtricsEnabled": true,
