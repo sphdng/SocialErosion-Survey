@@ -20,7 +20,11 @@ export function StartStudyButton() {
       sessionStorage.getItem("vignette-study:pid") === normalizedPid &&
       sessionStorage.getItem(`vignette-study:order:${normalizedPid}`)
     ) {
-      router.push("/study");
+      const introductionComplete =
+        sessionStorage.getItem(
+          `vignette-study:introduction-complete:${normalizedPid}`,
+        ) === "true";
+      router.push(introductionComplete ? "/study" : "/introduction");
       return;
     }
 
@@ -49,7 +53,10 @@ export function StartStudyButton() {
       sessionStorage.removeItem(
         `vignette-study:position:${normalizedPid}`,
       );
-      router.push("/study");
+      sessionStorage.removeItem(
+        `vignette-study:introduction-complete:${normalizedPid}`,
+      );
+      router.push("/introduction");
     } catch (submissionError) {
       setError(
         submissionError instanceof Error
@@ -83,7 +90,7 @@ export function StartStudyButton() {
           disabled={loading}
         />
         <button className={styles.button} type="submit" disabled={loading}>
-          {loading ? "Preparing study…" : "Begin study"}
+          {loading ? "Preparing study…" : "Continue"}
         </button>
       </div>
       {error && (

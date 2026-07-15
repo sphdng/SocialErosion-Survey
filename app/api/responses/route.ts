@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   const supabase = createSupabaseServerClient();
   const { data: participant, error: participantLookupError } = await supabase
     .from("participants")
-    .select("vignette_order")
+    .select("vignette_order, introduction_completed_at")
     .eq("pid", submittedPid)
     .maybeSingle();
   if (participantLookupError) {
@@ -48,6 +48,12 @@ export async function POST(request: Request) {
   ) {
     return NextResponse.json(
       { error: "Participant assignment was not found." },
+      { status: 400 },
+    );
+  }
+  if (!participant.introduction_completed_at) {
+    return NextResponse.json(
+      { error: "Complete the introduction before answering scenarios." },
       { status: 400 },
     );
   }

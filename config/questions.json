@@ -21,19 +21,19 @@
     },
     {
       "id": "q3",
-      "responseColumn": "q3",
+      "responseColumn": "q3_future_input_seeking",
       "text": "Alex would be more likely to seek Sam’s input for future work tasks.",
       "required": true
     },
     {
       "id": "q4",
-      "responseColumn": "q4",
+      "responseColumn": "q4_future_reliance",
       "text": "Alex would be more willing to rely on Sam for future work tasks.",
       "required": true
     },
     {
       "id": "q5",
-      "responseColumn": "q5",
+      "responseColumn": "q5_positive_relationship",
       "text": "Alex and Sam would be more likely to develop a positive working relationship.",
       "required": true
     }

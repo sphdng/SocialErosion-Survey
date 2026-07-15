@@ -37,6 +37,14 @@ export function StudyExperience({
       router.replace("/");
       return;
     }
+    if (
+      sessionStorage.getItem(
+        `vignette-study:introduction-complete:${storedPid}`,
+      ) !== "true"
+    ) {
+      router.replace("/introduction");
+      return;
+    }
 
     let vignetteOrder: unknown;
     try {
@@ -113,6 +121,9 @@ export function StudyExperience({
         sessionStorage.removeItem("vignette-study:pid");
         sessionStorage.removeItem(`vignette-study:position:${pid}`);
         sessionStorage.removeItem(`vignette-study:order:${pid}`);
+        sessionStorage.removeItem(
+          `vignette-study:introduction-complete:${pid}`,
+        );
         setCompleted(true);
         return;
       }

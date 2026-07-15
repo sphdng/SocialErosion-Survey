@@ -12,8 +12,9 @@ condition label, and these metadata fields:
 - `impact_level`
 
 Optional jitter values can be added as `task_type_jitter_v`,
-`iv2_jitter_v`, `iv3_jitter_v`, and `iv4_jitter_v`. Missing jitter
-values are intentionally stored as null.
+`directedness_jitter_v`, `data_access_jitter_v`, and
+`visibility_jitter_v`. Missing jitter values are intentionally stored as
+null.
 
 Changing vignette IDs or factor metadata requires regenerating the
 300-participant assignment table:
@@ -35,9 +36,9 @@ Do not change the `responseColumn` values after data collection begins:
 
 - `q1_seek_input`
 - `q2_incorporate`
-- `q3`
-- `q4`
-- `q5`
+- `q3_future_input_seeking`
+- `q4_future_reliance`
+- `q5_positive_relationship`
 
 Run `npm test`, `npm run lint`, and `npm run build` after editing either
 configuration file.

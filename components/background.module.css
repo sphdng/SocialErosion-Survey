@@ -32,9 +32,16 @@
   margin-top: 16px;
 }
 
-.version {
-  padding-left: 18px;
-  border-left: 3px solid #9ca3af;
+.versionList {
+  max-width: 76ch;
+  margin: 14px 0 0;
+  padding-left: 44px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.versionList li + li {
+  margin-top: 4px;
 }
 
 .trigger {

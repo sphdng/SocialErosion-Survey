@@ -68,9 +68,9 @@ describe("response rows", () => {
       vignette_id: "v01",
       vignette_number: 1,
       task_type: "Information",
-      iv2: "Human",
-      iv3: "Generic",
-      iv4: "Personal",
+      directedness: "Human",
+      data_access: "Generic",
+      visibility: "Personal",
       q1_seek_input: "Agree",
       time_spent_ms: 1000,
     });

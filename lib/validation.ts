@@ -70,9 +70,9 @@ export function validateStudyConfig(
   const expectedColumns = [
     "q1_seek_input",
     "q2_incorporate",
-    "q3",
-    "q4",
-    "q5",
+    "q3_future_input_seeking",
+    "q4_future_reliance",
+    "q5_positive_relationship",
   ];
   const responseColumns = questionConfig.questions.map(
     (question) => question.responseColumn,

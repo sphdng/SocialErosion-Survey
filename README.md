@@ -8,11 +8,14 @@ long-format row per vignette to Supabase.
 ## Study flow
 
 ```text
-Participant ID → 6 counterbalanced vignettes × 5 required questions → completion
+Participant ID → timed background reading → 6 counterbalanced vignettes
+→ 5 required questions per vignette → completion
 ```
 
-Each Save and continue click validates all five answers, writes the
-current row, and advances only after Supabase confirms the save.
+The background timer starts only after PID registration and counts time
+while the introduction page is visible. Each Save and continue click
+validates all five answers, writes the current row, and advances only
+after Supabase confirms the save.
 
 ## Editable configuration
 
@@ -62,7 +65,8 @@ Open `http://localhost:3000`. The migration creates:
 - `participants` — one row per PID
 - `vignette_responses` — one row per PID and vignette
 - `analysis_responses` — a view with the column names shown in the target
-  analysis schema
+  analysis schema, including introduction reading time and descriptive
+  IV/DV labels
 
 Reset the local database and reapply migrations with:
 

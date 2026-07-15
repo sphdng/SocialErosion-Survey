@@ -7,6 +7,25 @@ interface BackgroundContentProps {
   headingId?: string;
 }
 
+interface RichSegment {
+  text: string;
+  bold?: boolean;
+  underline?: boolean;
+}
+
+type BackgroundBlock =
+  | { type: "paragraph"; segments: RichSegment[] }
+  | { type: "ordered-list"; items: RichSegment[][] };
+
+function renderSegments(segments: RichSegment[]) {
+  return segments.map((segment, index) => {
+    let content: React.ReactNode = segment.text;
+    if (segment.bold) content = <strong>{content}</strong>;
+    if (segment.underline) content = <u>{content}</u>;
+    return <span key={`${index}-${segment.text}`}>{content}</span>;
+  });
+}
+
 export function BackgroundContent({
   showImage = true,
   headingId,
@@ -25,14 +44,19 @@ export function BackgroundContent({
       )}
       <div className={styles.text}>
         <h1 id={headingId}>{background.title}</h1>
-        {background.paragraphs.map((paragraph, index) => (
-          <p
-            key={paragraph}
-            className={index === 4 || index === 5 ? styles.version : undefined}
-          >
-            {paragraph}
-          </p>
-        ))}
+        {(background.blocks as BackgroundBlock[]).map((block, index) =>
+          block.type === "ordered-list" ? (
+            <ol key={`list-${index}`} className={styles.versionList}>
+              {block.items.map((item, itemIndex) => (
+                <li key={itemIndex}>{renderSegments(item)}</li>
+              ))}
+            </ol>
+          ) : (
+            <p key={`paragraph-${index}`}>
+              {renderSegments(block.segments)}
+            </p>
+          ),
+        )}
       </div>
     </div>
   );

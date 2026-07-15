@@ -93,27 +93,30 @@ export function buildResponseRow(
       "feedback-validation": "Feedback",
     }),
     task_type_jitter_v: optionalMetadata(metadata, "task_type_jitter_v"),
-    iv2: displayFactor(metadata?.leadership, {
+    directedness: displayFactor(metadata?.leadership, {
       "human-led": "Human",
       "ai-led": "AI",
     }),
-    iv2_jitter_v: optionalMetadata(metadata, "iv2_jitter_v"),
-    iv3: displayFactor(metadata?.knowledge_type, {
+    directedness_jitter_v: optionalMetadata(
+      metadata,
+      "directedness_jitter_v",
+    ),
+    data_access: displayFactor(metadata?.knowledge_type, {
       generic: "Generic",
       "org-specific": "Org-Specific",
     }),
-    iv3_jitter_v: optionalMetadata(metadata, "iv3_jitter_v"),
-    iv4: displayFactor(metadata?.impact_level, {
+    data_access_jitter_v: optionalMetadata(metadata, "data_access_jitter_v"),
+    visibility: displayFactor(metadata?.impact_level, {
       personal: "Personal",
       "team-level": "Team",
     }),
-    iv4_jitter_v: optionalMetadata(metadata, "iv4_jitter_v"),
+    visibility_jitter_v: optionalMetadata(metadata, "visibility_jitter_v"),
     full_vignette_text: vignette.body,
     q1_seek_input: responseValues.q1_seek_input,
     q2_incorporate: responseValues.q2_incorporate,
-    q3: responseValues.q3,
-    q4: responseValues.q4,
-    q5: responseValues.q5,
+    q3_future_input_seeking: responseValues.q3_future_input_seeking,
+    q4_future_reliance: responseValues.q4_future_reliance,
+    q5_positive_relationship: responseValues.q5_positive_relationship,
     time_spent_ms: timeSpentMs,
     started_at: new Date(now - timeSpentMs).toISOString(),
     submitted_at: new Date(now).toISOString(),
