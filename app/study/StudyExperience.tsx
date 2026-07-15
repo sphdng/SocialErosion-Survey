@@ -19,6 +19,19 @@ interface QualtricsProgressMessage {
   position?: unknown;
 }
 
+function isQualtricsOrigin(origin: string): boolean {
+  try {
+    const url = new URL(origin);
+    return (
+      url.protocol === "https:" &&
+      (url.hostname === "qualtrics.com" ||
+        url.hostname.endsWith(".qualtrics.com"))
+    );
+  } catch {
+    return false;
+  }
+}
+
 export function StudyExperience({
   vignettes,
   surveyUrl,
@@ -29,7 +42,7 @@ export function StudyExperience({
 
   useEffect(() => {
     function handleMessage(event: MessageEvent<QualtricsProgressMessage>) {
-      if (event.origin !== "https://nyu.qualtrics.com") return;
+      if (!isQualtricsOrigin(event.origin)) return;
       if (event.data?.type !== "vignette-study:progress") return;
 
       if (typeof event.data.vignetteId === "string") {

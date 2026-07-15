@@ -50,47 +50,35 @@ parameters.
 ## 4. Notify the website when Qualtrics advances
 
 The parent website cannot inspect Qualtrics pages directly because they
-are on different domains. Add this small, explicit message bridge.
-
-In the first question's HTML view, add this after the visible question
-text:
-
-```html
-<span
-  id="study-loop-context"
-  data-position="${lm://CurrentLoopNumber}"
-  hidden
-></span>
-```
-
-Then add this JavaScript to the first question:
+are on different domains. Add this JavaScript to the first question's
+existing **Add On Ready** function:
 
 ```js
-Qualtrics.SurveyEngine.addOnReady(function () {
-  var context = document.getElementById("study-loop-context");
-  var position = context ? Number(context.dataset.position) : 0;
-  var params = new URLSearchParams(window.location.search);
-  var vignetteId = params.get("vignette_" + position);
+var position = Number("${lm://CurrentLoopNumber}");
+var params = new URLSearchParams(window.location.search);
+var vignetteId = params.get("vignette_" + position);
 
-  if (!position || !vignetteId) {
-    console.error("Unable to identify the current vignette.");
-    return;
-  }
+if (!position || !vignetteId) {
+  console.error("Unable to identify the current vignette.");
+  return;
+}
 
-  window.parent.postMessage(
-    {
-      type: "vignette-study:progress",
-      position: position,
-      vignetteId: vignetteId
-    },
-    "https://YOUR-VERCEL-DOMAIN"
-  );
-});
+window.parent.postMessage(
+  {
+    type: "vignette-study:progress",
+    position: position,
+    vignetteId: vignetteId
+  },
+  "*"
+);
 ```
 
-Replace `https://YOUR-VERCEL-DOMAIN` with the exact production domain,
-without a trailing slash. This message contains only condition and progress
-information, never answers or participant identifiers.
+No question HTML is needed. If you previously added
+`study-loop-context`, you may remove it. The wildcard allows both Vercel
+preview and production domains to receive the public progress message; the
+website independently verifies that it came from Qualtrics and matches one
+of the 24 configured vignette IDs. No answers or participant identifiers
+are sent.
 
 ## 5. Publish and test
 
