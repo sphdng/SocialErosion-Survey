@@ -1,0 +1,14 @@
+{
+  "title": "About Alex and NextGen",
+  "image": "/nextgen-office.png",
+  "imageAlt": "Employees working together in a bright, open-plan office",
+  "paragraphs": [
+    "Alex works at NextGen, a large, fast-paced, tech-forward company as a client-facing consultant. Alex’s role often involves tasks like data analysis, conducting research, drafting up reports, and delivering presentations to key stakeholders.",
+    "Alex is part of a six-person, cross-functional team that collaborates with one another on shared projects and day-to-day work tasks. Alex’s team is hybrid, and so they have the option to work with one another either in-person or remotely, through work messaging apps like Slack or Teams, email, or video calls.",
+    "One of Alex’s peer teammates is Sam, who is a fellow consultant. Alex and Sam have a professional working relationship where they collaborate and seek one another’s input or feedback.",
+    "Like many companies, NextGen provides its employees access to an in-house AI chatbot agent, named Aidee, to support their work. Employees can use two versions of Aidee:",
+    "GenAidee: A general-purpose version that works as well as the leading AI chatbots (e.g., ChatGPT, Claude, or Gemini).",
+    "IntAidee: A NextGen-specific version that works similarly well, but has been trained on and has access to internal organizational data, such as past reports and presentations.",
+    "Aidee is fully compliant with NextGen’s privacy and security requirements. Alex can access Aidee privately on their own computer, or through a shared team workspace, where teammates such as Sam can view Alex’s interactions with Aidee and join the conversation at any time."
+  ]
+}

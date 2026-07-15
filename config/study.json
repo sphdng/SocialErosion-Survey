@@ -1,6 +1,7 @@
 {
-  "assignmentMode": "random",
+  "assignmentMode": "all",
   "totalVignettes": 24,
+  "vignettesPerParticipant": 24,
   "questionsPerVignette": 5,
   "qualtricsEnabled": true,
   "showDirectLinkFallback": true,

@@ -26,6 +26,25 @@ export function validateStudyConfig(
     throw new Error("questionsPerVignette must equal 5.");
   }
 
+  if (
+    !Number.isInteger(settings.vignettesPerParticipant) ||
+    settings.vignettesPerParticipant < 1 ||
+    settings.vignettesPerParticipant > vignettes.length
+  ) {
+    throw new Error(
+      "vignettesPerParticipant must be a valid number of conditions.",
+    );
+  }
+
+  if (
+    settings.assignmentMode === "all" &&
+    settings.vignettesPerParticipant !== vignettes.length
+  ) {
+    throw new Error(
+      "All-condition mode must present every configured vignette.",
+    );
+  }
+
   const ids = vignettes.map((vignette) => vignette.id);
   if (new Set(ids).size !== ids.length) {
     throw new Error("Vignette IDs must be unique.");

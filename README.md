@@ -1,30 +1,27 @@
 # Workplace Vignette Study
 
 A Next.js presentation layer for a 24-condition workplace AI vignette
-study. Vercel displays the assigned vignette; NYU Qualtrics displays the
-five response questions and records all responses.
+study. Each participant sees all 24 vignettes in order. Vercel keeps the
+current vignette visible; NYU Qualtrics repeats the same five response
+questions for each vignette and records all 120 answers.
 
 The application does not store participant answers.
 
-## Study URLs
-
-Direct condition links run from:
+## Study flow
 
 ```text
-http://localhost:3000/study?vignette=v01
-http://localhost:3000/study?vignette=v24
+Start page → 24 vignettes → five Qualtrics questions per vignette
 ```
 
-The default assignment mode is `query-param`. A missing or invalid
-condition produces an error rather than silently assigning a participant.
-Change `assignmentMode` in `config/study.json` to `random` only when the
-study team explicitly approves client-side random assignment.
+Qualtrics Loop & Merge controls progression and only advances after all
+five required questions for the current vignette are answered.
 
 ## Editable configuration
 
 - `config/study.json` — assignment and integration settings
-- `config/vignettes.json` — all vignette text, metadata, and five question
-  definitions per condition
+- `config/background.json` — start-page and background-dialog content
+- `config/vignettes.json` — all vignette text, metadata, and question
+  mappings
 
 The recovered final vignette text is present for all 24 conditions.
 Question wording remains visibly marked `[PLACEHOLDER]`; replace it before
@@ -38,7 +35,7 @@ npm install
 npm run dev
 ```
 
-Then open `http://localhost:3000/study?vignette=v01`.
+Then open `http://localhost:3000`.
 
 Validation and tests:
 
@@ -66,7 +63,7 @@ token to a `NEXT_PUBLIC_` variable.
 2. Keep the detected framework preset as **Next.js**.
 3. Add both environment variables from `.env.example`.
 4. Set `NEXT_PUBLIC_SITE_URL` to the production Vercel domain.
-5. Deploy and test several condition links on desktop and mobile.
+5. Deploy and test the full 24-vignette flow on desktop and mobile.
 6. Submit test responses and verify embedded data in Qualtrics.
 
 ## Qualtrics integration
@@ -81,9 +78,9 @@ The application exposes read-only public configuration at:
 /api/study-config/v01
 ```
 
-Editing JSON only updates the wording inside Qualtrics after the documented
-Qualtrics custom JavaScript is installed. Until then, manually synchronize
-JSON and Qualtrics wording before every deployment.
+The documented Qualtrics message bridge tells the parent website when Loop
+& Merge advances, allowing the left vignette panel and progress indicator
+to stay synchronized without exposing answers.
 
 If NYU Qualtrics blocks iframe embedding, the participant can use the
 condition-preserving direct link shown below the iframe. Do not proxy or

@@ -1,4 +1,4 @@
-export type AssignmentMode = "query-param" | "random";
+export type AssignmentMode = "query-param" | "random" | "all";
 
 export type QuestionType =
   | "likert"
@@ -40,6 +40,7 @@ export interface VignetteCondition {
 export interface StudySettings {
   assignmentMode: AssignmentMode;
   totalVignettes: number;
+  vignettesPerParticipant: number;
   questionsPerVignette: number;
   qualtricsEnabled: boolean;
   showDirectLinkFallback: boolean;

@@ -1,120 +1,110 @@
 # NYU Qualtrics setup
 
-The Vercel application presents the vignette. Qualtrics owns consent,
-validation, progression, responses, IDs, timestamps, and exports.
+The website presents all 24 vignettes in order and keeps the current
+vignette visible on the left. Qualtrics repeats the same five Alex-and-Sam
+questions once for each vignette, validates every response, advances to the
+next block, and records 120 vignette-linked answers.
 
-## Required survey structure
+## 1. Configure the five-question block
 
-1. Publish the survey and use its approved distribution URL.
-2. Add one block containing exactly five native Qualtrics response
-   questions.
-3. Keep stable export tags:
+1. Keep exactly five native Qualtrics questions in one block.
+2. Set every question to **Force Response**.
+3. Keep these stable question numbers/export tags:
    - `VIGNETTE_Q1`
    - `VIGNETTE_Q2`
    - `VIGNETTE_Q3`
    - `VIGNETTE_Q4`
    - `VIGNETTE_Q5`
-4. Add these Embedded Data fields near the start of Survey Flow:
-   - `vignette_id`
-   - `condition_label`
-   - `source`
-   - `task_type`
-   - `leadership`
-   - `knowledge_type`
-   - `impact_level`
-5. Configure required-response validation in Qualtrics.
-6. Confirm that the survey's authentication settings match the protocol.
+4. Put a page break after the block if other survey content follows.
 
-The study page uses `URLSearchParams` to append those fields to both the
-iframe and direct fallback link.
+## 2. Repeat the block 24 times
 
-## Dynamic question wording
+Open the block's three-dot menu and select **Loop & Merge**.
 
-The public endpoint returns the five configured questions:
+1. Turn looping on.
+2. Add 24 rows.
+3. Set the row values to `1` through `24`.
+4. Do not randomize the loop rows; they map directly to `v01` through
+   `v24`.
+
+Qualtrics will now require the same five questions for each of the 24
+vignettes before advancing.
+
+## 3. Add Embedded Data fields
+
+Near the beginning of **Survey Flow**, add an Embedded Data element with:
 
 ```text
-https://YOUR-VERCEL-DOMAIN/api/study-config/v01
+source
+vignette_ids
+vignette_count
+vignette_1
+vignette_2
+...
+vignette_24
 ```
 
-For each Qualtrics question, put a deliberately stable element in its
-question text:
+Leave their values blank. Qualtrics captures them from the website's query
+parameters.
+
+## 4. Notify the website when Qualtrics advances
+
+The parent website cannot inspect Qualtrics pages directly because they
+are on different domains. Add this small, explicit message bridge.
+
+In the first question's HTML view, add this after the visible question
+text:
 
 ```html
-<span id="dynamic-question-q1">Loading question…</span>
+<span
+  id="study-loop-context"
+  data-position="${lm://CurrentLoopNumber}"
+  hidden
+></span>
 ```
 
-Use the matching ID for `q2` through `q5`.
-
-Then add custom JavaScript to each question. Replace the Vercel domain and
-set `exportTag` to the corresponding stable export tag:
+Then add this JavaScript to the first question:
 
 ```js
 Qualtrics.SurveyEngine.addOnReady(function () {
+  var context = document.getElementById("study-loop-context");
+  var position = context ? Number(context.dataset.position) : 0;
   var params = new URLSearchParams(window.location.search);
-  var vignetteId = params.get("vignette_id");
-  var exportTag = "VIGNETTE_Q1";
-  var target = document.getElementById("dynamic-question-q1");
-  var nextButton = document.getElementById("NextButton");
+  var vignetteId = params.get("vignette_" + position);
 
-  if (!vignetteId || !target) {
-    if (target) target.textContent = "Unable to load this question.";
-    if (nextButton) nextButton.disabled = true;
+  if (!position || !vignetteId) {
+    console.error("Unable to identify the current vignette.");
     return;
   }
 
-  fetch(
-    "https://YOUR-VERCEL-DOMAIN/api/study-config/" +
-      encodeURIComponent(vignetteId)
-  )
-    .then(function (response) {
-      if (!response.ok) {
-        throw new Error("Unable to load study configuration.");
-      }
-      return response.json();
-    })
-    .then(function (config) {
-      var question = config.questions.find(function (item) {
-        return item.exportTag === exportTag;
-      });
-      if (!question) {
-        throw new Error("Question configuration not found.");
-      }
-      target.textContent = question.text;
-    })
-    .catch(function (error) {
-      console.error(error);
-      target.textContent =
-        "This question could not be loaded. Please contact the research team.";
-      if (nextButton) nextButton.disabled = true;
-    });
+  window.parent.postMessage(
+    {
+      type: "vignette-study:progress",
+      position: position,
+      vignetteId: vignetteId
+    },
+    "https://YOUR-VERCEL-DOMAIN"
+  );
 });
 ```
 
-This code must be tested in the current NYU Qualtrics survey-taking
-experience. Do not rely on undocumented Qualtrics CSS classes.
+Replace `https://YOUR-VERCEL-DOMAIN` with the exact production domain,
+without a trailing slash. This message contains only condition and progress
+information, never answers or participant identifiers.
 
-If dynamic wording is unreliable, store the wording directly in Qualtrics
-and manually compare it with `config/vignettes.json` before deployment.
+## 5. Publish and test
 
-## CORS
+Publish the survey and test the Vercel site from its start page.
 
-The configuration API permits reads from:
+Confirm:
 
-```text
-https://nyu.qualtrics.com
-```
-
-If NYU serves the survey from a different host, update `corsHeaders` in
-`app/api/study-config/[vignetteId]/route.ts`.
-
-## Manual data test
-
-Test several vignette IDs and confirm in **Data & Analysis**:
-
-- The response was recorded.
-- `vignette_id` and condition metadata are correct.
-- Each answer appears under its expected export tag.
-- The displayed wording matches the JSON.
-- Completion status, response ID, and timestamps are present.
+- All 24 scenarios appear in order.
+- Scenario 1 appears with the first five questions.
+- Qualtrics prevents progression until all five are answered.
+- The left panel changes to scenarios 2–24 after each block.
+- The background icon opens and closes on every study page.
+- One Qualtrics response contains all 24 loop iterations and 120 answers.
+- `vignette_1` through `vignette_24` match the scenarios shown.
+- The loop-specific answers map to the expected question export tags.
 
 Remove test responses before launch if required by the study protocol.

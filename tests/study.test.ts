@@ -1,12 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { buildQualtricsUrl } from "@/lib/qualtrics";
+import {
+  buildQualtricsSessionUrl,
+  buildQualtricsUrl,
+} from "@/lib/qualtrics";
 import {
   getVignetteById,
   studySettings,
   vignettes,
 } from "@/lib/studyConfig";
 import { validateStudyConfig } from "@/lib/validation";
-import { assignRandomVignette } from "@/lib/vignetteAssignment";
 
 describe("study configuration", () => {
   it("passes validation", () => {
@@ -59,21 +61,21 @@ describe("Qualtrics URL construction", () => {
       "vercel-study-site",
     );
   });
-});
 
-describe("random assignment", () => {
-  it("persists the first assignment for the browser session", () => {
-    const values = new Map<string, string>();
-    const storage = {
-      getItem: (key: string) => values.get(key) ?? null,
-      setItem: (key: string, value: string) => values.set(key, value),
-    };
+  it("includes all 24 session vignettes by position", () => {
+    const result = new URL(
+      buildQualtricsSessionUrl(
+        "https://nyu.qualtrics.com/jfe/form/SV_example",
+        vignettes,
+      ),
+    );
 
-    expect(
-      assignRandomVignette(["v01", "v02", "v03"], storage, () => 0.5),
-    ).toBe("v02");
-    expect(
-      assignRandomVignette(["v01", "v02", "v03"], storage, () => 0),
-    ).toBe("v02");
+    expect(result.searchParams.get("vignette_ids")).toBe(
+      vignettes.map((vignette) => vignette.id).join(","),
+    );
+    expect(result.searchParams.get("vignette_1")).toBe("v01");
+    expect(result.searchParams.get("vignette_24")).toBe("v24");
+    expect(result.searchParams.get("vignette_count")).toBe("24");
   });
 });
+

@@ -1,54 +1,22 @@
-import { QualtricsPanel } from "@/components/QualtricsPanel";
 import { StudyError } from "@/components/StudyError";
-import { VignettePanel } from "@/components/VignettePanel";
-import { buildQualtricsUrl, isValidQualtricsUrl } from "@/lib/qualtrics";
+import {
+  buildQualtricsSessionUrl,
+  isValidQualtricsUrl,
+} from "@/lib/qualtrics";
 import {
   assertValidStudyConfig,
-  getVignetteById,
   studySettings,
   vignettes,
 } from "@/lib/studyConfig";
-import { StudyPageClient } from "./StudyPageClient";
-import styles from "./study.module.css";
+import { StudyExperience } from "./StudyExperience";
 
-interface StudyPageProps {
-  searchParams: Promise<{
-    vignette?: string | string[];
-  }>;
-}
-
-export default async function StudyPage({
-  searchParams,
-}: StudyPageProps) {
+export default function StudyPage() {
   try {
     assertValidStudyConfig();
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       throw error;
     }
-    return <StudyError />;
-  }
-
-  const params = await searchParams;
-  const requestedId =
-    typeof params.vignette === "string" ? params.vignette : undefined;
-
-  if (!requestedId) {
-    if (studySettings.assignmentMode === "random") {
-      return (
-        <StudyPageClient
-          vignetteIds={vignettes.map((vignette) => vignette.id)}
-        />
-      );
-    }
-
-    return (
-      <StudyError message="This study link is missing a vignette condition. Please return to the original study link or contact the research team." />
-    );
-  }
-
-  const vignette = getVignetteById(requestedId);
-  if (!vignette) {
     return <StudyError />;
   }
 
@@ -63,29 +31,18 @@ export default async function StudyPage({
     );
   }
 
-  const surveyUrl = buildQualtricsUrl(
+  const surveyUrl = buildQualtricsSessionUrl(
     baseUrl,
-    vignette,
+    vignettes,
     studySettings.source,
   );
 
   return (
-    <main className={styles.studyPage}>
-      <div className={styles.studyShell}>
-        <VignettePanel
-          title={vignette.title}
-          body={vignette.body}
-          conditionLabel={vignette.conditionLabel}
-          vignetteId={vignette.id}
-        />
-        <QualtricsPanel
-          surveyUrl={surveyUrl}
-          iframeTitle={studySettings.iframeTitle}
-          showDirectLinkFallback={
-            studySettings.showDirectLinkFallback
-          }
-        />
-      </div>
-    </main>
+    <StudyExperience
+      vignettes={vignettes}
+      surveyUrl={surveyUrl}
+      iframeTitle={studySettings.iframeTitle}
+      showDirectLinkFallback={studySettings.showDirectLinkFallback}
+    />
   );
 }
