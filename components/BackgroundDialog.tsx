@@ -1,27 +1,40 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { BackgroundContent } from "./BackgroundContent";
 import styles from "./background.module.css";
 
 export function BackgroundDialog() {
   const [open, setOpen] = useState(false);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const closeDialog = useCallback(() => {
+    setOpen(false);
+    window.requestAnimationFrame(() => triggerButtonRef.current?.focus());
+  }, []);
 
   useEffect(() => {
     if (!open) return;
 
     closeButtonRef.current?.focus();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") closeDialog();
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [open]);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeDialog, open]);
 
   return (
     <>
       <button
+        ref={triggerButtonRef}
         className={styles.trigger}
         type="button"
         onClick={() => setOpen(true)}
@@ -33,33 +46,36 @@ export function BackgroundDialog() {
         </svg>
       </button>
 
-      {open && (
-        <div
-          className={styles.backdrop}
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) setOpen(false);
-          }}
-        >
-          <section
-            className={styles.dialog}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="background-dialog-title"
+      {open &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className={styles.backdrop}
+            role="presentation"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) closeDialog();
+            }}
           >
-            <button
-              ref={closeButtonRef}
-              className={styles.close}
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Close background information"
+            <section
+              className={styles.dialog}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="background-dialog-title"
             >
-              ×
-            </button>
-            <BackgroundContent headingId="background-dialog-title" />
-          </section>
-        </div>
-      )}
+              <button
+                ref={closeButtonRef}
+                className={styles.close}
+                type="button"
+                onClick={closeDialog}
+                aria-label="Close background information"
+              >
+                ×
+              </button>
+              <BackgroundContent headingId="background-dialog-title" />
+            </section>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
