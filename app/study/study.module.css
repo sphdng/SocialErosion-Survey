@@ -1,0 +1,183 @@
+.studyPage {
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+.studyShell {
+  display: grid;
+  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  width: min(1400px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px #e5e7eb;
+}
+
+.vignettePanel {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow-y: auto;
+  padding: clamp(32px, 5vw, 64px);
+  border-right: 1px solid #d1d5db;
+  background: #ffffff;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #4b5563;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.vignetteTitle {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.vignetteBody {
+  max-width: 62ch;
+  margin-top: 32px;
+  color: #1f2937;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.vignetteBody p {
+  margin: 0;
+}
+
+.vignetteBody p + p {
+  margin-top: 1em;
+}
+
+.condition {
+  margin: 32px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.qualtricsPanel {
+  min-width: 0;
+  background: #ffffff;
+}
+
+.iframeWrap {
+  position: relative;
+  min-height: 760px;
+}
+
+.iframe {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  min-height: 760px;
+  border: 0;
+  background: #ffffff;
+}
+
+.iframeLoading {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  padding: 14px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.fallback {
+  margin: 0;
+  padding: 16px 20px 24px;
+  border-top: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.fallback a {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.fallback a:focus-visible,
+.fallback a:hover {
+  color: #1e40af;
+}
+
+.statePage {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: #f3f4f6;
+}
+
+.stateCard {
+  width: min(560px, 100%);
+  padding: 32px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgb(17 24 39 / 8%);
+}
+
+.stateCard h1 {
+  margin: 0 0 12px;
+  color: #111827;
+  font-size: 1.5rem;
+}
+
+.stateCard p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 800px) {
+  .studyShell {
+    display: block;
+  }
+
+  .vignettePanel {
+    position: static;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 32px 20px;
+    border-right: 0;
+    border-bottom: 1px solid #d1d5db;
+  }
+
+  .vignetteBody {
+    margin-top: 24px;
+  }
+
+  .iframe,
+  .iframeWrap {
+    height: 900px;
+    min-height: 700px;
+  }
+}

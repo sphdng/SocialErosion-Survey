@@ -1,0 +1,9 @@
+{
+  "assignmentMode": "query-param",
+  "totalVignettes": 24,
+  "questionsPerVignette": 5,
+  "qualtricsEnabled": true,
+  "showDirectLinkFallback": true,
+  "iframeTitle": "Workplace vignette survey questions",
+  "source": "vercel-study-site"
+}

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Social Erosion Survey",
-  description: "NYU Qualtrics survey hosted on Vercel",
+  title: "Workplace AI Study",
+  description: "A research study about workplace AI use",
 };
 
 export default function RootLayout({
