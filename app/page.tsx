@@ -1,21 +1,29 @@
-import { StartStudyButton } from "@/components/StartStudyButton";
+import consent from "@/config/consent.json";
+import { ConsentForm } from "@/components/ConsentForm";
 import styles from "./start.module.css";
 
-export default function HomePage() {
+export default function ConsentPage() {
+  const durationParagraph = consent.paragraphs[1];
+  const [beforeDuration, afterDuration] = durationParagraph.split(
+    consent.durationEmphasis,
+  );
+
   return (
     <main className={styles.page}>
       <section className={styles.card}>
         <div className={styles.entryIntro}>
-          <p className={styles.eyebrow}>Workplace AI research</p>
-          <h1>Welcome to the study</h1>
+          <p className={styles.eyebrow}>Research study</p>
+          <h1>{consent.title}</h1>
+          <p>{consent.paragraphs[0]}</p>
           <p>
-            Enter the participant ID provided by the research team. You will
-            review the study background on the next page before beginning the
-            scenarios.
+            {beforeDuration}
+            <strong>{consent.durationEmphasis}</strong>
+            {afterDuration}
           </p>
+          <p>{consent.paragraphs[2]}</p>
         </div>
         <div className={styles.actions}>
-          <StartStudyButton />
+          <ConsentForm />
         </div>
       </section>
     </main>

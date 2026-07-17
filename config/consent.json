@@ -1,0 +1,13 @@
+{
+  "title": "AI at Work and Social Interactions",
+  "paragraphs": [
+    "You are invited to participate in a research study examining how workplace AI use influences interactions among colleagues.",
+    "The study will take approximately 20 minutes. You will read short, hypothetical workplace scenarios, answer questions about them, and complete a brief questionnaire. Participation is voluntary, and you may stop at any time without penalty. Your responses will be kept confidential.",
+    "Please review the attached consent form for full information about the study, including its procedures, risks, compensation, privacy practices, and researcher contact information."
+  ],
+  "durationEmphasis": "20 minutes",
+  "consentFormHref": "/aise_consent_form.pdf",
+  "consentFormLabel": "Download the full consent form (PDF)",
+  "checkboxLabel": "By checking the box below, you confirm that you have read and understood the information provided above, voluntarily agree to participate in this research study, and understand that you may withdraw from the study at any time without penalty.",
+  "continueLabel": "Continue"
+}

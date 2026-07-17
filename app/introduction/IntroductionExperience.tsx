@@ -15,12 +15,17 @@ export function IntroductionExperience() {
   const visibleSinceRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (sessionStorage.getItem("vignette-study:consent") !== "true") {
+      router.replace("/");
+      return;
+    }
+
     const storedPid = sessionStorage.getItem("vignette-study:pid");
     const storedOrder = storedPid
       ? sessionStorage.getItem(`vignette-study:order:${storedPid}`)
       : null;
     if (!storedPid || !storedOrder) {
-      router.replace("/");
+      router.replace("/participant");
       return;
     }
 

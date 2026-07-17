@@ -8,22 +8,25 @@ long-format row per vignette to Supabase.
 ## Study flow
 
 ```text
-Participant ID → timed background reading → 6 counterbalanced vignettes
-→ 5 required questions per vignette → completion
+Consent → Participant ID → timed background reading → 6 counterbalanced
+vignettes → 5 required questions per vignette → completion
 ```
 
-The background timer starts only after PID registration and counts time
-while the introduction page is visible. Each Save and continue click
+The consent page requires agreement and provides the full consent form
+PDF. The background timer starts only after PID registration and counts
+time while the introduction page is visible. Each Save and continue click
 validates all five answers, writes the current row, and advances only
 after Supabase confirms the save.
 
 ## Editable configuration
 
 - `config/study.json` — study size and assignment mode
-- `config/background.json` — start-page and background-dialog content
+- `config/consent.json` — consent-page copy and PDF link
+- `config/background.json` — background-page and dialog content
 - `config/vignettes.json` — vignette text and factor metadata
 - `config/questions.json` — the five shared questions and response scale
 - `config/counterbalance.json` — all 300 six-vignette assignment orders
+- `public/aise_consent_form.pdf` — downloadable consent form
 
 All five shared questions have confirmed wording. See
 [`docs/ADDING_OR_EDITING_VIGNETTES.md`](docs/ADDING_OR_EDITING_VIGNETTES.md).

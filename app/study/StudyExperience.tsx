@@ -32,9 +32,14 @@ export function StudyExperience({
   const startedAtRef = useRef(Date.now());
 
   useEffect(() => {
+    if (sessionStorage.getItem("vignette-study:consent") !== "true") {
+      router.replace("/");
+      return;
+    }
+
     const storedPid = sessionStorage.getItem("vignette-study:pid");
     if (!storedPid) {
-      router.replace("/");
+      router.replace("/participant");
       return;
     }
     if (
@@ -60,7 +65,7 @@ export function StudyExperience({
       vignetteOrder.some((id) => typeof id !== "string")
     ) {
       sessionStorage.removeItem("vignette-study:pid");
-      router.replace("/");
+      router.replace("/participant");
       return;
     }
 
@@ -69,7 +74,7 @@ export function StudyExperience({
     );
     if (assigned.some((vignette) => !vignette)) {
       sessionStorage.removeItem("vignette-study:pid");
-      router.replace("/");
+      router.replace("/participant");
       return;
     }
 

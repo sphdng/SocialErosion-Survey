@@ -24,11 +24,58 @@
   font-size: clamp(2rem, 5vw, 3rem);
 }
 
-.entryIntro > p:last-child {
+.entryIntro > p {
   max-width: 62ch;
   margin: 0;
   color: #4b5563;
   line-height: 1.7;
+}
+
+.entryIntro > p + p {
+  margin-top: 16px;
+}
+
+.consentForm {
+  padding-top: 28px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.consentLinkRow {
+  margin: 0 0 20px;
+}
+
+.consentLink {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+
+.consentLink:hover,
+.consentLink:focus-visible {
+  color: #1e40af;
+}
+
+.consentCheckbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #111827;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.consentCheckbox input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex: none;
+  accent-color: #1d4ed8;
+}
+
+.consentActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
 }
 
 .eyebrow {
@@ -99,7 +146,7 @@
 }
 
 .button:disabled {
-  cursor: wait;
+  cursor: not-allowed;
   opacity: 0.72;
 }
 
@@ -142,6 +189,10 @@
 
   .button {
     width: 100%;
+  }
+
+  .consentActions {
+    justify-content: stretch;
   }
 
   .introductionActions {

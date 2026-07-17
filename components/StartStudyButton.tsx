@@ -20,6 +20,9 @@ export function StartStudyButton() {
       sessionStorage.getItem("vignette-study:pid") === normalizedPid &&
       sessionStorage.getItem(`vignette-study:order:${normalizedPid}`)
     ) {
+      if (sessionStorage.getItem("vignette-study:consent") !== "true") {
+        sessionStorage.setItem("vignette-study:consent", "true");
+      }
       const introductionComplete =
         sessionStorage.getItem(
           `vignette-study:introduction-complete:${normalizedPid}`,
